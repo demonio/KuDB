@@ -1,0 +1,109 @@
+
+/* form style */
+#myform {
+	position:relative;
+	background:silver;	
+	padding:0; 
+	color:#EEE;
+	margin:0 auto;
+	padding:0 5px 5px 0;
+} 
+
+/* nested fieldset */
+#myform fieldset {
+	float:left;
+	border:0;
+	margin:5px 0 0 5px;
+	padding:10px;
+	background:#333;	
+}
+
+/* typography */
+#myform h3 { color:#EEE; margin:0; }
+#myform p { font-size:11px; }
+
+/* input & textarea field */
+#myform input,
+#myform textarea {
+	border:1px solid #444;
+	background:#666;
+	padding:5px;
+	color:#DDD;
+	font:12px "Lucida Grande","bitstream vera sans","trebuchet ms","sans-serif","verdana";	
+	/* CSS3 spicing */
+	text-shadow:1px 1px 1px #000;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;	
+}
+
+#myform input[type="number"] { text-align:center; }
+
+#myform input:focus,
+#myform textarea:focus { color:#fff; background:#777; }
+#myform input:active,
+#myform textarea:active { background:#888; }
+
+
+/* button */
+#myform button {
+	outline:0;
+	border:none;
+	-moz-border-radius-bottomleft:10.2em;
+	-moz-border-radius-bottomright:10.2em;
+	-moz-border-radius-topleft:10.2em;
+	-moz-border-radius-topright:10.2em;
+	-moz-box-shadow:0 0.1em 0.2em rgba(0, 0, 0, 0.5);
+	background:#C6CCD8;
+	color:#000;
+	cursor:pointer;
+	font-size:11px;
+	line-height:1;
+	padding-bottom:0.3em;
+	padding-left:0.6em;
+	padding-right:0.6em;
+	padding-top:0.3em;
+}
+#myform button:hover {
+	background:#4F6792;
+	color:#FFF;
+}
+
+/* error message */
+.error {
+	height:15px;
+	background-color:#FFFE36;
+	font-size:11px;
+	border:1px solid #E1E16D;
+	padding:4px 10px;
+	color:#000;
+	display:none;	
+	
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px; 
+	-moz-border-radius-bottomleft:0;
+	-moz-border-radius-topleft:0;	
+	-webkit-border-bottom-left-radius:0; 
+	-webkit-border-top-left-radius:0;
+	
+	-moz-box-shadow:0 0 6px #DDD;
+	-webkit-box-shadow:0 0 6px #DDD;	
+}
+
+.error p {
+	margin:0;		
+}
+
+/* field label */
+label {
+	display:block;
+	font-size:11px;
+	color:#CCC;
+}
+
+#terms label {
+	float:left;
+}
+
+#terms input {
+	margin:0 5px;
+}

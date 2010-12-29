@@ -1,0 +1,44 @@
+
+<ul>
+	<?php
+	foreach ( $_SESSION['hosts'] as $data )
+	{
+		$host = $data['host'];
+		?>
+		<li>
+			<h2><?php echo $host; ?></h2>
+			<?php
+			$databases = Load::model( 'kudb' )->getDatabases( $host );
+			?>
+			<ul class="accordion">
+				<?php
+				foreach ( $databases as $database )
+				{
+					?>
+					<li>
+						<h2><?php echo $database; ?></h2>
+						<?php
+						$tables = Load::model( 'kudb' )->getTables( $host, $database );
+						?>
+						<ul class="pane">
+							<?php
+							foreach ( $tables as $table )
+							{
+								?>
+								<li><?php echo Html::link( "kudb/cambiar/$host/$database/$table", $table ); ?></li>
+								<?php
+							}
+							$tables = array();
+							?>
+						</ul>
+					</li>
+					<?php
+				}
+				$databases = array();
+				?>
+			</ul>
+		</li>
+		<?php
+	}
+	?>
+</ul>

@@ -1,0 +1,12 @@
+
+body {
+	font-family:"Lucida Grande","bitstream vera sans","trebuchet ms",sans-serif,verdana;
+	background:url('../img/gradient_xmas.jpg') repeat-x #707070;
+	margin:0;
+	padding:0;
+}
+
+a { color:silver; }
+a:active { outline:none; }
+
+:focus { -moz-outline-style:none; }
