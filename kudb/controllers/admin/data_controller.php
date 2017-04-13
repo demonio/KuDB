@@ -30,11 +30,12 @@ class DataController extends AdminController
             $this->n_rows = (new Data)->countRows($table);
             $this->rows = (new Data)->readRows($table, $page);
 
-            $this->search_in = Session::has('search_in') ? Session::get('search_in') : 'id';
+            $this->pk = (new Data)->getPK($table);
+            $this->search_in = Session::has('search_in') ? Session::get('search_in') : $this->pk;
             $this->search_as = Session::has('search_as') ? Session::get('search_as') : '%%';
             $this->search_is = Session::has('search_is') ? Session::get('search_is') : '';
             $this->order = Session::has('order') ? Session::get('order') : 'DESC';
-            $this->by = Session::has('by') ? Session::get('by') : 'id';
+            $this->by = Session::has('by') ? Session::get('by') : $this->pk;
             $this->rows_per_page =
                 Session::has('rows_per_page') ? Session::get('rows_per_page') : '10';
             $this->pages = floor($this->n_rows/$this->rows_per_page);
