@@ -1,7 +1,7 @@
 <?php 
 /**
  */
-class Data extends LiteRecord
+class Kudb extends LiteRecord
 {   
     protected static $pk = '';
     protected static $table = '';

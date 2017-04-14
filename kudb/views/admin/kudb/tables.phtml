@@ -1,10 +1,12 @@
-
-<aside class="col s0 m4 l3 pr0">
-    <ul class="collection">
+<?php
+$tables = View::getVar('tables');
+?>
+<aside>
+    <ul class="collection mv0">
         <li class="collection-item">
             <h3>
                 Tablas
-                <a href="/admin/data/table">
+                <a href="/admin/kudb/table">
                     <i class="small material-icons">add</i>
                 </a>
             </h3>
@@ -17,12 +19,9 @@
                 $active = ($t === $_SERVER['REQUEST_URI']) ? 'active ' : ''; ?>
                 <li class="<?=$active?>box-link collection-item filtered">
                     <?=$t?>
-                    <a href="/admin/data/rows/<?=$t?>/1"></a>
+                    <a href="/admin/kudb/rows/<?=$t?>/1"></a>
                 </li>
             <?php endforeach;
         endif; ?>
     </ul>
 </aside>
-<a class="btn-floating btn-large black m0 l0" data-toggle-aside="aside">
-    <i class="material-icons">menu</i>
-</a>

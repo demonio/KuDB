@@ -1,14 +1,17 @@
-
-<script>
-$(function()
-{
-    <?php if ( Session::has('toast') ) : ?>
+<?php 
+if ( Session::has('toast') ) :
+	?>
+	<script>
+	$(function()
+	{	    
         // Materialize.toast(message, displayLength, className, completeCallback);
         // 4000 is the duration of the toast
         <?php foreach (Session::get('toast') as $toast) : ?>
             Materialize.toast('<?=$toast?>', 4000);
-        <?php endforeach;
-        Session::delete('toast');
-    endif; ?>
-});
-</script>
+        <?php endforeach; ?>
+	       
+	});
+	</script>
+	<?php
+	Session::delete('toast');
+endif;
