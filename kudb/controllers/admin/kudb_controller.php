@@ -3,6 +3,10 @@
  */
 class KudbController extends AdminController
 {   
+    # 
+    public $version = '1.1';
+
+    #
     public $cols_of_cols = ['Field'=>'Campo', 'Type'=>'Tipo', 'Null'=>'Nulo', 'Key'=>'Llave', 'Default'=>'Por defecto', 'Extra'=>'Extra'];
 
     #
@@ -18,8 +22,10 @@ class KudbController extends AdminController
     }
 
     #
-    public function index($table='')
+    public function index()
     {
+        $this->version = (new Kudb)->readVersion();
+        $this->database = (new Kudb)->readDatabase();
         $this->tables = (new Kudb)->readTables();
         if ( ! $this->table ) $this->table = $table;
     }

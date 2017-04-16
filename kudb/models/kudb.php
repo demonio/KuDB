@@ -58,6 +58,15 @@ class Kudb extends LiteRecord
         return $a;
     }
 
+    public function readDatabase($database='default')
+    {
+        include APP_PATH.'config/databases.php';
+        $dsn = $databases[$database]['dsn'];
+        $s = explode('dbname=', $dsn)[1];
+        $dbname = explode(';', $s)[0];
+        return $dbname;
+    }
+
     public function readRow($table, $row_id)
     {
         $sql = "SELECT * FROM $table WHERE id=?";
@@ -129,6 +138,11 @@ class Kudb extends LiteRecord
         $table = "Tables_in_$db->name";
         foreach ($tables as $o) $a[] = $o->$table;
         return $a;
+    }
+
+    public function readVersion()
+    {
+        #$version = Config::read('version');
     }
 
     public function updateCol($data)

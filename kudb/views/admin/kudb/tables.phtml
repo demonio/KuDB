@@ -1,11 +1,13 @@
 <?php
+$database = View::getVar('database');
 $tables = View::getVar('tables');
 ?>
 <aside>
     <ul class="collection mv0">
+
         <li class="collection-item">
             <h3>
-                Tablas
+                Tablas en "<?=$database?>"
                 <a href="/admin/kudb/table">
                     <i class="small material-icons">add</i>
                 </a>

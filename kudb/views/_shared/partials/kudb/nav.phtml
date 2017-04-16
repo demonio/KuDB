@@ -1,11 +1,13 @@
-
+<?php
+$version = View::getVar('version');
+?>
 <nav>
     <div>
         <div>
             <div class="max-width">
-                <a href="/"><i class="material-icons">home</i></a>
+                <a href="/admin/"><i class="material-icons">home</i></a>
 
-                <a class="grey darken-2" href="/admin/kudb/">KuDB v1.1</a>
+                <a class="grey darken-2" href="/admin/kudb/">KuDB v<?=$version?></a>
 
                 <a data-toggle="aside, #sidenav-overlay"><i class="material-icons">list</i></a>
                 
