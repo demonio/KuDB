@@ -46,7 +46,7 @@ class KudbController extends AdminController
             $this->by = Session::has('by') ? Session::get('by') : $this->pk;
             $this->rows_per_page =
                 Session::has('rows_per_page') ? Session::get('rows_per_page') : '10';
-            $this->pages = floor($this->n_rows/$this->rows_per_page);
+            $this->pages = ceil($this->n_rows/$this->rows_per_page);
             $this->page = $page;
         endif;
         $this->table = $table;
