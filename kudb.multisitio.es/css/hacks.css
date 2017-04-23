@@ -1,6 +1,6 @@
 
 /* CURSOR EN CONTENIDO DE LOS ENLACES */
-a * { cursor:pointer; }
+a, a * { cursor:pointer; }
 
 .file-field .file-path-wrapper { padding-left:0; }
 

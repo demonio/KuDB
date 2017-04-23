@@ -77,16 +77,19 @@ class Kudb extends LiteRecord
     {
         # WHERE
         $pk = static::getPK($table);
-        if ( ! empty($_POST['search_in']) ) Session::set('search_in', $_POST['search_in']);
-        if ( ! empty($_POST['search_as']) ) Session::set('search_as', $_POST['search_as']);
-        if ( ! empty($_POST['search_is']) ) Session::set('search_is', $_POST['search_is']);
-        $search_in = Session::has('search_in') ? Session::get('search_in') : $pk;
-        $search_as = Session::has('search_as') ? Session::get('search_as') : '%%';
+
+        if ( isset($_POST['search_in']) ) Session::set('search_in', $_POST['search_in']);
+        if ( isset($_POST['search_as']) ) Session::set('search_as', $_POST['search_as']);
+        if ( isset($_POST['search_is']) ) Session::set('search_is', $_POST['search_is']);
+
+        $search_in = Session::has('search_in') ? Session::get('search_in') : '';
+        $search_as = Session::has('search_as') ? Session::get('search_as') : '';
         $search_is = Session::has('search_is') ? Session::get('search_is') : '';
 
         $where='';
         if ($search_is) :
             $where = " WHERE $search_in";
+
             if ($search_as == '%%') :
                 $where .= " LIKE '%$search_is%'";
             elseif ($search_as == '^%') :
@@ -127,6 +130,7 @@ class Kudb extends LiteRecord
         $limit = $rows_per_page*($page-1) . ",$rows_per_page";
         $sql .=  " LIMIT $limit";
 
+        #_::d($sql);
         $rows = $this->all($sql);
         return $rows;
     }
@@ -142,7 +146,15 @@ class Kudb extends LiteRecord
 
     public function readVersion()
     {
-        #$version = Config::read('version');
+        $url = 'https://raw.githubusercontent.com/demonio/KuDB/master/kudb/config/version.ini';
+        $s = file_get_contents($url);
+        $vr = parse_ini_string($s, true);
+        $vl = Config::read('version');
+        $version_remota = $vr['application']['version'];
+        $version_local = $vl['application']['version'];
+
+        if ($version_remota > $version_local) 
+            return $version_remota;
     }
 
     public function updateCol($data)

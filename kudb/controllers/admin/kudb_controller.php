@@ -24,7 +24,7 @@ class KudbController extends AdminController
     #
     public function index()
     {
-        $this->version = (new Kudb)->readVersion();
+        $this->new_version = (new Kudb)->readVersion();
         $this->database = (new Kudb)->readDatabase();
         $this->tables = (new Kudb)->readTables();
         if ( ! $this->table ) $this->table = $table;
@@ -39,8 +39,8 @@ class KudbController extends AdminController
             $this->rows = (new Kudb)->readRows($table, $page);
 
             $this->pk = (new Kudb)->getPK($table);
-            $this->search_in = Session::has('search_in') ? Session::get('search_in') : $this->pk;
-            $this->search_as = Session::has('search_as') ? Session::get('search_as') : '%%';
+            $this->search_in = Session::has('search_in') ? Session::get('search_in') : '';
+            $this->search_as = Session::has('search_as') ? Session::get('search_as') : '';
             $this->search_is = Session::has('search_is') ? Session::get('search_is') : '';
             $this->order = Session::has('order') ? Session::get('order') : 'DESC';
             $this->by = Session::has('by') ? Session::get('by') : $this->pk;
