@@ -21,4 +21,4 @@
 ## Por hacer:
 * Nada en mente por ahora.
 
-[Powered by KumbiaPHP](http://kumbiaphp.com)
+[Powered by KumbiaPHP](https://www.kumbiaphp.com)

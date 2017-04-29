@@ -24,8 +24,8 @@ class KudbController extends AdminController
     #
     public function index()
     {
-        $this->new_version = (new Kudb)->readVersion();
         $this->database = (new Kudb)->readDatabase();
+        $this->new_version = (new Kudb)->readVersion();
         $this->tables = (new Kudb)->readTables();
         if ( ! $this->table ) $this->table = $table;
     }
@@ -49,6 +49,7 @@ class KudbController extends AdminController
             $this->pages = ceil($this->n_rows/$this->rows_per_page);
             $this->page = $page;
         endif;
+        $this->database = (new Kudb)->readDatabase();
         $this->table = $table;
         $this->tables = (new Kudb)->readTables();
     }
@@ -57,6 +58,7 @@ class KudbController extends AdminController
     public function row($table, $row_id=0)
     {
         $this->cols = (new Kudb)->readCols($table);
+        $this->database = (new Kudb)->readDatabase();
         $this->row = ($row_id)
             ? (new Kudb)->readRow($table, $row_id)
             : '';
@@ -69,6 +71,7 @@ class KudbController extends AdminController
     {
         $this->col = $col;
         $this->cols = $table ? (new Kudb)->readCols($table) : [];
+        $this->database = (new Kudb)->readDatabase();
         $this->table = $table;
         $this->tables = (new Kudb)->readTables();
     }

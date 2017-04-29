@@ -6,9 +6,9 @@ class Kudb extends LiteRecord
     protected static $pk = '';
     protected static $table = '';
 
-    public static function getPK($table)
+    public static function getPK()
     {
-        self::$table = $table;
+        self::$table = func_get_args()[0];
         return parent::getPK();
     }
 
