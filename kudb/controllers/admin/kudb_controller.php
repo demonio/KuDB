@@ -35,6 +35,11 @@ class KudbController extends AdminController
     {
         if ($table) :
             $this->cols = (new Kudb)->readCols($table, 'Field');
+            if ( ! in_array(Session::get('search_in'), $this->cols) ) :
+                Session::delete('search_in');
+                Session::delete('search_as');
+                Session::delete('search_is');
+            endif;
             $this->n_rows = (new Kudb)->countRows($table);
             $this->rows = (new Kudb)->readRows($table, $page);
 

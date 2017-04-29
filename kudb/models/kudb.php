@@ -181,7 +181,16 @@ class Kudb extends LiteRecord
     {
         $table = $data['table'];
         unset($data['table'], $data['table_old']);
-        if ( (new $table)->update($data) ) Session::setArray('toast', 'Registro actualizado');
+        foreach ($data as $k=>$v)
+        {
+            if ($k == 'id') continue;
+            $fields[] = "$k=?";
+            $values[] = ( strstr($k, '_in') ) ? date('Y:m:d H:i:s') : $v;
+        }
+        $fields = implode(',', $fields);
+        $values[] = $id = $data['id'];
+        $sql = "UPDATE $table SET $fields WHERE id=?";
+        if ( static::query($sql, $values) ) Session::setArray('toast', 'Registro actualizado');
     }
 
     public function updateTable($data)

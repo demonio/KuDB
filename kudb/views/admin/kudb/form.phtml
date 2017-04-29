@@ -22,15 +22,6 @@ foreach ($cols as $o)
         </div>
         <?php
     }
-    else if ( strstr($col, 'tags') )
-    {
-        ?>
-        <div class="col s12">
-            <label><?=$label?></label>
-            <input type="text" name="tags" value="<?=$value?>">
-        </div>
-        <?php
-    }
     else if ( strstr($col_type, 'text') )
     {
         ?>
