@@ -40,8 +40,18 @@ class Kudb extends LiteRecord
     {   
         $table = $data['table'];
         unset($data['table'], $data['table_old']);
-        if ( $row = (new $table)->create($data) ) Session::setArray('toast', 'Registro creado');
-        return ($row) ? $row->id : 0;
+        foreach ($data as $k=>$v)
+        {
+            if ($k == 'id') continue;
+            $fields[] = $k;
+            $params[] = '?';
+            $values[] = ( strstr($k, '_at') ) ? date('Y:m:d H:i:s') : $v;
+        }
+        $fields = implode(',', $fields);
+        $params = implode(',', $params);
+        $sql = "INSERT INTO $table ($fields) VALUES ($params)";
+        if ( static::query($sql, $values) ) Session::setArray('toast', 'Registro creado');
+        return static::lastInsertId();
     }
 
     public function createTable($data)
