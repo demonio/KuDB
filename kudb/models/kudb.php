@@ -37,12 +37,13 @@ class Kudb extends LiteRecord
     }
 
     public function createRow($data)
-    {   
+    {  
         $table = $data['table'];
         unset($data['table'], $data['table_old']);
+        $pk = (new Kudb)->getPK($table); 
         foreach ($data as $k=>$v)
         {
-            if ($k == 'id') continue;
+            if ($k == $pk) continue;
             $fields[] = $k;
             $params[] = '?';
             $values[] = ( strstr($k, '_at') ) ? date('Y:m:d H:i:s') : $v;
@@ -79,7 +80,8 @@ class Kudb extends LiteRecord
 
     public function readRow($table, $row_id)
     {
-        $sql = "SELECT * FROM $table WHERE id=?";
+        $pk = (new Kudb)->getPK($table);
+        $sql = "SELECT * FROM $table WHERE $pk=?";
         return $this->first($sql, $row_id);
     }
 
@@ -191,15 +193,16 @@ class Kudb extends LiteRecord
     {
         $table = $data['table'];
         unset($data['table'], $data['table_old']);
+        $pk = (new Kudb)->getPK($table);
         foreach ($data as $k=>$v)
         {
-            if ($k == 'id') continue;
+            if ($k == $pk) continue;
             $fields[] = "$k=?";
             $values[] = ( strstr($k, '_in') ) ? date('Y:m:d H:i:s') : $v;
         }
         $fields = implode(',', $fields);
         $values[] = $id = $data['id'];
-        $sql = "UPDATE $table SET $fields WHERE id=?";
+        $sql = "UPDATE $table SET $fields WHERE $pk=?";
         if ( static::query($sql, $values) ) Session::setArray('toast', 'Registro actualizado');
     }
 
@@ -220,8 +223,9 @@ class Kudb extends LiteRecord
     public function deleteRow($data)
     {
         $table = $data['table'];
+        $pk = (new Kudb)->getPK($table);
         $id = $data['id'];
-        $sql = "DELETE FROM $table WHERE id=?";
+        $sql = "DELETE FROM $table WHERE $pk=?";
         if ( static::query($sql, $id) ) Session::setArray('toast', 'Registro eliminado');
     }
 

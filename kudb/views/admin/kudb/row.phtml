@@ -31,7 +31,7 @@
                     <button type="button" class="all-width btn red darken-1" data-toggle=".delete_row button">Eliminar registro</button>
                     <button type="submit" class="all-width btn red darken-1" name="action" style="display:none" value="delete_row"><?=_('¿Seguro?')?></button>
                 </div>
-                <input type="hidden" name="id" value="<?=$row->id?>">
+                <input type="hidden" name="id" value="<?=$row->$pk?>">
             <?php endif; ?>
             <div class="clearfix"></div>
         </li>

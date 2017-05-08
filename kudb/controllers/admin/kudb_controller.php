@@ -64,6 +64,7 @@ class KudbController extends AdminController
     {
         $this->cols = (new Kudb)->readCols($table);
         $this->database = (new Kudb)->readDatabase();
+        $this->pk = (new Kudb)->getPK($table);
         $this->row = ($row_id)
             ? (new Kudb)->readRow($table, $row_id)
             : '';
@@ -113,7 +114,7 @@ class KudbController extends AdminController
     public function delete_row($data)
     {
         (new Kudb)->deleteRow($data);
-        exit( Redirect::to("admin/kudb/row/{$data['table']}") );
+        exit( Redirect::to("admin/kudb/rows/{$data['table']}") );
     }
 
     public function create_table($data)
